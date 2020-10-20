@@ -140,7 +140,7 @@ export class CardDesigner extends Designer.DesignContext {
                             {
                                 type: "TextBlock",
                                 wrap: true,
-                                text: "Select an element in the card to modify its properties.",
+                                text: "Select an element in the card to modify its properties."
                             }
                         ]
                     },
@@ -168,7 +168,7 @@ export class CardDesigner extends Designer.DesignContext {
             this._draggedElement = sender.renderDragVisual();
             this._draggedElement.style.position = "absolute";
             this._draggedElement.style.left = this._currentMousePosition.x + "px";
-            this._draggedElement.style.top =  this._currentMousePosition.y + "px";
+            this._draggedElement.style.top = this._currentMousePosition.y + "px";
 
             document.body.appendChild(this._draggedElement);
         }
@@ -270,7 +270,7 @@ export class CardDesigner extends Designer.DesignContext {
     }
 
     private recreateDesignerSurface() {
-        let styleSheetLinkElement = <HTMLLinkElement>(document.getElementById("adaptiveCardStylesheet"));
+        let styleSheetLinkElement = <HTMLLinkElement>document.getElementById("adaptiveCardStylesheet");
 
         if (styleSheetLinkElement == null) {
             styleSheetLinkElement = document.createElement("link");
@@ -321,8 +321,7 @@ export class CardDesigner extends Designer.DesignContext {
             let errorPane = document.getElementById("errorPane");
             errorPane.innerHTML = "";
 
-            if (
-                this.targetVersion.compareTo(this.hostContainer.targetVersion) > 0 && Shared.GlobalSettings.showTargetVersionMismatchWarning) {
+            if (this.targetVersion.compareTo(this.hostContainer.targetVersion) > 0 && Shared.GlobalSettings.showTargetVersionMismatchWarning) {
                 errorPane.appendChild(this.renderErrorPaneElement("[Warning] The selected Target Version (" + this.targetVersion.toString() + ") is greater than the version supported by " + this.hostContainer.name + " (" + this.hostContainer.targetVersion.toString() + ")"));
             }
 
@@ -411,7 +410,7 @@ export class CardDesigner extends Designer.DesignContext {
         if (toolbox) {
             let jsonEditorHeaderRect = toolbox.getHeaderBoundingRect();
 
-            toolbox.content.style.height = hostPanelRect.height - jsonEditorHeaderRect.height + "px";
+            toolbox.content.style.height = (hostPanelRect.height - jsonEditorHeaderRect.height) + "px";
         }
     }
 
@@ -594,7 +593,7 @@ export class CardDesigner extends Designer.DesignContext {
 
     private prepareToolbar() {
         if (Shared.GlobalSettings.showVersionPicker) {
-            this._versionChoicePicker = new ToolbarChoicePicker( CardDesigner.ToolbarCommands.VersionPicker);
+            this._versionChoicePicker = new ToolbarChoicePicker(CardDesigner.ToolbarCommands.VersionPicker);
             this._versionChoicePicker.label = "Target version:";
             this._versionChoicePicker.alignment = ToolbarElementAlignment.Right;
             this._versionChoicePicker.separator = true;
@@ -722,7 +721,7 @@ export class CardDesigner extends Designer.DesignContext {
             (sender: ToolbarButton) => { this.togglePreview(); });
         this._togglePreviewButton.separator = true;
         this._togglePreviewButton.allowToggle = true;
-        this._togglePreviewButton.isVisible =  Shared.GlobalSettings.enableDataBindingSupport;
+        this._togglePreviewButton.isVisible = Shared.GlobalSettings.enableDataBindingSupport;
 
         this.toolbar.addElement(this._togglePreviewButton);
 
@@ -946,7 +945,7 @@ export class CardDesigner extends Designer.DesignContext {
             	});
 		}
 
-        window.addEventListener("resize", () => { this.onResize(); });
+        window.addEventListener('resize', () => { this.onResize(); });
 
         this._isMonacoEditorLoaded = true;
 
@@ -1011,7 +1010,7 @@ export class CardDesigner extends Designer.DesignContext {
             new Clipboard(
 				this._copyJSONButton.renderedElement,
 				{
-                	text: (trigger) => JSON.stringify(this.getBoundCard(), null, 4),
+                	text: (trigger) => JSON.stringify(this.getBoundCard(), null, 4)
             	})
                 .on("error", () => this._copyJSONButton.renderedElement.focus())
                 .on("success", () => this._copyJSONButton.renderedElement.focus());
@@ -1055,8 +1054,7 @@ export class CardDesigner extends Designer.DesignContext {
 
         this._jsonEditorsPanel.addToolbox(this._cardEditorToolbox);
 
-        if (
-            Shared.GlobalSettings.enableDataBindingSupport && Shared.GlobalSettings.showSampleDataEditorToolbox) {
+        if (Shared.GlobalSettings.enableDataBindingSupport && Shared.GlobalSettings.showSampleDataEditorToolbox) {
             this._sampleDataEditorToolbox = new Toolbox("sampleDataEditor", Strings.toolboxes.sampleDataEditor.title);
             this._sampleDataEditorToolbox.content = document.createElement("div");
             this._sampleDataEditorToolbox.content.style.padding = "8px";
@@ -1192,7 +1190,7 @@ export class CardDesigner extends Designer.DesignContext {
     }
 
     set targetVersion(value: Adaptive.Version) {
-        if (this._targetVersion.compareTo(value) !== 0 && !this._preventRecursiveSetTargetVersion ) {
+        if (this._targetVersion.compareTo(value) !== 0 && !this._preventRecursiveSetTargetVersion) {
             this._preventRecursiveSetTargetVersion = true;
 
             try {
@@ -1249,9 +1247,7 @@ export class CardDesigner extends Designer.DesignContext {
 
             this.activeHostContainerChanged();
 
-            if (
-                Shared.GlobalSettings.selectedHostContainerControlsTargetVersion
-            ) {
+            if (Shared.GlobalSettings.selectedHostContainerControlsTargetVersion) {
                 this.targetVersion = this._hostContainer.targetVersion;
             }
         }
